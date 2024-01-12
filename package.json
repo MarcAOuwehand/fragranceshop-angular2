@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production && mv dist/frangrance-shop _static",
+    "build": "ng build --configuration production && mkdir -p _static && mv dist/frangrance-shop/browser/* _static",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
