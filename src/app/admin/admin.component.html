@@ -1,0 +1,22 @@
+<div class="admin-container">
+  <h1>Admin panel</h1>
+
+  <h2>Add a new product</h2>
+  <form (ngSubmit)="addNewProduct(newProduct)" name="productForm" #productForm="ngForm" novalidate>
+    <input type="text" placeholder="Productname" [(ngModel)]="newProduct.name" name="name" [ngModelOptions]="{standalone: true}" required />
+    <input type="text" placeholder="Brand" [(ngModel)]="newProduct.brand" name="brand" [ngModelOptions]="{standalone: true}" required />
+    <input type="number" placeholder="Price" [(ngModel)]="newProduct.price" name="price" [ngModelOptions]="{standalone: true}" required />
+    <input type="text" placeholder="Description" [(ngModel)]="newProduct.description" name="description" [ngModelOptions]="{standalone: true}" required />
+    <input type="text" placeholder="img_path" [(ngModel)]="newProduct.img_path" name="img_path" [ngModelOptions]="{standalone: true}" required />
+    <button type="submit" [disabled]="!productForm?.valid">Add product</button>
+  </form>
+
+  <hr>
+
+  <h2>Create new admin account</h2>
+  <form (ngSubmit)="createAdminAccount()">
+    <input type="text" placeholder="email" [(ngModel)]="newAdmin.email" [ngModelOptions]="{standalone: true}" required />
+    <input type="password" placeholder="Password" [(ngModel)]="newAdmin.password" [ngModelOptions]="{standalone: true}" required />
+    <button type="submit" [disabled]="!newAdmin.username || !newAdmin.password">Create admin account</button>
+  </form>
+</div>

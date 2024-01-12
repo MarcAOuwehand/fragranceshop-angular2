@@ -1,0 +1,16 @@
+<div class="login-container">
+  <div class="login-section">
+    <h4 class="login-header">Login</h4>
+    <div class="input-container">
+      <input type="text" placeholder="Email" [(ngModel)]="email">
+      <input type="password" placeholder="Wachtwoord" [(ngModel)]="password">
+    </div>
+    <div class="error-message" *ngIf="showError">
+      <p>Email of wachtwoord is niet correct. Probeer het opnieuw.</p>
+    </div>
+    <div class="button-container">
+      <button (click)="onLogin()">Verder</button>
+      <p class="register-text" (click)="onRegister()">Register by clicking here</p>
+    </div>
+  </div>
+</div>

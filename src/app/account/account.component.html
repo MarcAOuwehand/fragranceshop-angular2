@@ -1,0 +1,17 @@
+<div class="account-container">
+  <h2>Account Details</h2>
+
+  <div class="account-info">
+    <p>Email: {{ userModel?.email }}</p>
+    <p>Role: {{ userModel?.role }}</p>
+    <p>Orders:</p>
+    <ul>
+      <li *ngFor="let order of userOrders">
+        <p>Order ID: {{ order.orderID }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <button class="logout-btn" (click)="logout()">Logout</button>
+  <button *ngIf="userModel?.role === 'ADMIN'" class="admin-btn" (click)="adminLink()">Admin Panel</button>
+</div>

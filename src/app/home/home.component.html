@@ -1,0 +1,24 @@
+<div class="container">
+  <header class="text-center py-5">
+    <h1>Welcome to FragranceShop</h1>
+    <p>Discover a world of delightful scents!</p>
+    <a href="http://localhost:4200/store" class="btn btn-primary">Explore</a>
+  </header>
+
+  <div *ngIf="randomProduct" class="random-product">
+    <h2>Recommend for you!</h2>
+    <div class="product-card">
+      <img [src]="randomProduct.img_path" alt="Product Image" class="product-image" />
+      <div class="product-details">
+        <p class="brand">{{ randomProduct.brand }}</p>
+        <h2 class="name">{{ randomProduct.name }}</h2>
+        <button class="button details-btn" (click)="goToProduct(randomProduct.productID)">Details</button>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="text-center py-3">
+    <p>&copy; 2024 FragranceShop. All rights reserved.</p>
+  </footer>
+</div>
