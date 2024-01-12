@@ -18,6 +18,7 @@
     ]
   },
   "angularCompilerOptions": {
+    "types": ["jwt-decode"],
     "enableI18nLegacyMessageIdFormat": false
   }
 }
