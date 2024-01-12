@@ -12,8 +12,8 @@ export class LoginService {
   loginChanged = new EventEmitter<void>();
   loginError = new EventEmitter<boolean>();
 
-  private apiUrl = 'http://localhost:8081/api/v1/auth/authenticate';
-  private registerApiUrl = 'http://localhost:8081/api/v1/auth/register';
+  private apiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/authenticate';
+  private registerApiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/register';
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 

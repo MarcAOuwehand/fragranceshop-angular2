@@ -5,7 +5,7 @@ import {map, Observable} from "rxjs";
 
 @Injectable()
 export class DataStorageService {
-  private apiUrl = 'http://localhost:8081/api';
+  private apiUrl = 'https://s1142622-iprwc.store:8081/api';
   bearer = sessionStorage.getItem("token");
 
   constructor(
