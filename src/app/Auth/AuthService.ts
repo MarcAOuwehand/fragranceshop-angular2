@@ -9,7 +9,7 @@ import {catchError, map, Observable, of} from "rxjs";
 })
 export class AuthService {
 
-  apiUrl: string = 'https://s1142622-iprwc.store:8081/api/users/';
+  apiUrl: string = 'http://localhost:8081/api/users/';
 
   constructor(private jwtHelper: JwtHelperService, private http: HttpClient) {
   }

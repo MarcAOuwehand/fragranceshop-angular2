@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 })
 export class ProductService {
   products: Product[] = [];
-  apiUrl: string = 'https://s1142622-iprwc.store:8081/api/products';
+  apiUrl: string = 'http://localhost:8081/api/products';
   bearer: string = sessionStorage.getItem("token");
 
   constructor(private http: HttpClient) {}
@@ -28,4 +28,10 @@ export class ProductService {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.bearer);
     return this.http.post(this.apiUrl, newProduct, { headers });
   }
+
+  public removeProduct(productId: string) {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.bearer);
+    return this.http.delete(`${this.apiUrl}/${productId}`, { headers });
+  }
+
 }

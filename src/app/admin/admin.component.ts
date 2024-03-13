@@ -16,7 +16,9 @@ export class AdminComponent {
   constructor(private http: HttpClient, private productService: ProductService, private loginService: LoginService, private router: Router) {}
 
   addNewProduct(newProduct: Product) {
-    this.productService.addNewProduct(newProduct).subscribe(
+    this.productService
+      .addNewProduct(newProduct)
+      .subscribe(
       (response) => {
     })
     this.router.navigate(['']);
@@ -30,6 +32,10 @@ export class AdminComponent {
     };
 
     this.loginService.registerAdmin(credentials);
+  }
+
+  goToEditProducts(){
+    this.router.navigate(['admin/products']);
   }
 }
 

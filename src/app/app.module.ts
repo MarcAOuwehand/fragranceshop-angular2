@@ -18,6 +18,8 @@ import { OrderComponent } from './cart/order/order.component';
 import { AccountComponent } from './account/account.component';
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import { PromocodeComponent } from './cart/promocode/promocode.component';
+import { ProductoptionsComponent } from './admin/productoptions/productoptions.component';
+import { CreateproductComponent } from './admin/createproduct/createproduct.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { PromocodeComponent } from './cart/promocode/promocode.component';
     OrderComponent,
     AccountComponent,
     PromocodeComponent,
+    ProductoptionsComponent,
+    CreateproductComponent,
   ],
   imports: [
     BrowserModule,

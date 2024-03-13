@@ -12,10 +12,10 @@ export class LoginService {
   loginChanged = new EventEmitter<void>();
   loginError = new EventEmitter<boolean>();
 
-  private apiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/authenticate';
-  private registerApiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/register';
+  private apiUrl = 'http://localhost:8081/api/v1/auth/authenticate';
+  private registerApiUrl = 'http://localhost:8081/api/v1/auth/register';
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: any){
     this.http.post<any>(this.apiUrl, credentials).subscribe(

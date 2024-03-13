@@ -7,7 +7,7 @@ import { OrderModel } from './order.model';
   providedIn: 'root'
 })
 export class OrderService {
-  apiUrl: string = 'https://s1142622-iprwc.store:8081/api/orders';
+  apiUrl: string = 'http://localhost:8081/api/orders';
   bearer: string = sessionStorage.getItem('token');
 
   constructor(private http: HttpClient) {}

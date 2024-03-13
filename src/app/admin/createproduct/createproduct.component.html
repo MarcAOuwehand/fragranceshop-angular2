@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" #productForm="ngForm" class="product-form">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="newProduct.name" required maxlength="50" class="form-control" #name="ngModel">
+    <div *ngIf="name.invalid && name.touched" class="error-message">
+      Name is required and can not be longer then 50 symbols.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" name="brand" [(ngModel)]="newProduct.brand" required maxlength="50" class="form-control" #brand="ngModel">
+  </div>
+  <div *ngIf="brand.invalid && brand.touched" class="error-message">
+    Brand is required and can not be longer then 50 symbols.
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" [(ngModel)]="newProduct.price" required class="form-control" #price="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="newProduct.description" required maxlength="250" class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="imagePath">Afbeeldingspad:</label>
+    <input type="text" id="imagePath" name="imagePath" [(ngModel)]="newProduct.img_path" required maxlength="250" class="form-control" #imagePath="ngModel">
+  </div>
+  <div *ngIf="imagePath.invalid && imagePath.touched" class="error-message">
+    Imagepath is required and can not be longer then 250 symbols.
+  </div>
+  <button type="submit" [disabled]="productForm.invalid" class="submit-button">Add new product to store!</button>
+</form>
