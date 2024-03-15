@@ -3,7 +3,8 @@ import { LoginService } from "../login/login.service";
 import { Router } from "@angular/router";
 import { AuthService } from "../Auth/AuthService";
 import { UserModel } from "./user.model";
-import {OrderService} from "../cart/order/order.service";
+import { OrderService } from "../cart/order/order.service";
+import { DataStorageService } from "../data-storage.service";
 
 @Component({
   selector: 'app-account',
@@ -17,7 +18,7 @@ export class AccountComponent implements OnInit {
   userOrders: any[] = [];
 
 
-  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, private orderService: OrderService) {
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, private orderService: OrderService, private dataStorageService: DataStorageService) {
   }
 
   ngOnInit(): void {
@@ -31,31 +32,22 @@ export class AccountComponent implements OnInit {
     );
 
     this.getOrders();
-    this.getOrdersByUserId(this.authService.getUserId());
   }
 
   getOrders(): void {
-    this.orderService.getOrders().subscribe(
+    this.dataStorageService.getOrders().subscribe(
       payload => {
         this.orders = Array.isArray(payload) ? payload : [];
-        console.log('Orders:', this.orders);
+        this.getOrdersByUserId(this.authService.getUserId());
       },
     );
   }
 
   getOrdersByUserId(userId: string): void {
-    console.log('UserID:', userId);
-    console.log('All Orders:', this.orders);
-
-    for (let order of this.orders) {
-      console.log('Checking Order:', order);
-      if (order.userid === userId) {
-        this.userOrders.push(order);
-      }
-    }
-
-    console.log('User Orders:', this.userOrders);
+    this.userOrders = this.orders.filter(order => order.userID === userId);
   }
+
+
 
 
   logout() {

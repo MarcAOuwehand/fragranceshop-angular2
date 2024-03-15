@@ -1,41 +1,42 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { OrderModel } from './order.model';
+import { Injectable } from "@angular/core";
+import { OrderModel } from "./order.model";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+  orders: OrderModel[] = [];
   apiUrl: string = 'https://s1142622-iprwc.store:8081/api/orders';
-  bearer: string = sessionStorage.getItem('token');
+  bearer: string = sessionStorage.getItem("token") || '';  // Toegevoegd || '' om te zorgen dat bearer altijd een string is
 
   constructor(private http: HttpClient) {}
 
-  placeOrder(order: OrderModel): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.bearer}`
-    });
-
-    return this.http.post(this.apiUrl, order, { headers });
+  public getOrders() {
+    return this.orders;
   }
 
-  getOrders(){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.bearer}`
-    });
-
-    return this.http.get(this.apiUrl, { headers });
+  public setOrders(orders: any) {
+    this.orders = orders;
   }
 
-  getOrdersByUserId(userId: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.bearer}`
-    });
+  public getOrderById(orderId: string): OrderModel | undefined {
+    return this.orders.find(order => order.orderID === orderId);
+  }
 
-    return this.http.get(`${this.apiUrl}/user/${userId}`, { headers });
+  public placeOrder(newOrder: OrderModel): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.bearer);
+    return this.http.post(this.apiUrl, newOrder, { headers });
+  }
+
+  public updateOrder(order: OrderModel): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.bearer);
+    return this.http.put(`${this.apiUrl}/${order.orderID}`, order, { headers });
+  }
+
+  public cancelOrder(orderId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.bearer);
+    return this.http.delete(`${this.apiUrl}/${orderId}`, { headers });
   }
 }

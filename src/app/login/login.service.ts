@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {Router} from "@angular/router";
-import {AuthService} from "../Auth/AuthService";
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +13,21 @@ export class LoginService {
 
   private apiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/authenticate';
   private registerApiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/register';
+  private registerAdminApiUrl = 'https://s1142622-iprwc.store:8081/api/v1/auth/registerAdmin';
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: any){
+  login(credentials: any) {
     this.http.post<any>(this.apiUrl, credentials).subscribe(
       (response) => {
         sessionStorage.setItem('token', response.token);
-        this.loginChanged.emit()
+        this.loginChanged.emit();
         this.router.navigate(['']);
       },
       (error) => {
         this.loginError.emit(true);
       }
-    )
+    );
   }
 
   register(userDetails: any) {
@@ -44,16 +44,16 @@ export class LoginService {
   }
 
   registerAdmin(userDetails: any) {
-    this.http.post<any>(this.registerApiUrl, userDetails).subscribe(
+    this.http.post<any>(this.registerAdminApiUrl, userDetails).subscribe(
       (response) => {
-        this.router.navigate(['']);
+        this.router.navigate(['admin']);
       },
       (error) => {
+        console.error(error);
         this.loginError.emit(true);
       }
     );
   }
-
 
   logout(): void {
     sessionStorage.removeItem('token');
