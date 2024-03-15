@@ -20,6 +20,8 @@ import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import { PromocodeComponent } from './cart/promocode/promocode.component';
 import { ProductoptionsComponent } from './admin/productoptions/productoptions.component';
 import { CreateproductComponent } from './admin/createproduct/createproduct.component';
+import { OrdermenuComponent } from './admin/ordermenu/ordermenu.component';
+import { NewadminComponent } from './admin/newadmin/newadmin.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { CreateproductComponent } from './admin/createproduct/createproduct.comp
     PromocodeComponent,
     ProductoptionsComponent,
     CreateproductComponent,
+    OrdermenuComponent,
+    NewadminComponent
   ],
   imports: [
     BrowserModule,

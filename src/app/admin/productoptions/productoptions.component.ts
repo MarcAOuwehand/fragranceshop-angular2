@@ -35,15 +35,24 @@ export class ProductoptionsComponent implements OnInit {
 
   updateProduct() {
     if (!this.editingProduct) return;
+
     this.productService.updateProduct(this.editingProduct).subscribe({
-      next: (updatedProduct) => {
+      next: () => {
         this.editingProduct = null;
+        this.fetchProducts();
       },
       error: (error) => {
-        console.error("Can't update the product");
+        console.error("Can't update the product", error);
         this.editingProduct = null;
       }
     });
+  }
+
+  fetchProducts() {
+    this.dataStorageService.getProducts().subscribe(
+      (products: Product[]) => {
+        this.products = products;
+      });
   }
 
   deleteProduct(product: Product) {

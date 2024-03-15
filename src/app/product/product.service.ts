@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 export class ProductService {
   products: Product[] = [];
   apiUrl: string = 'http://localhost:8081/api/products';
-  bearer: string = sessionStorage.getItem("token") || '';  // Toegevoegd || '' om te zorgen dat bearer altijd een string is
+  bearer: string = sessionStorage.getItem("token") || '';
 
   constructor(private http: HttpClient) {}
 

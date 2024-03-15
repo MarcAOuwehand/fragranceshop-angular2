@@ -37,5 +37,13 @@ export class AdminComponent {
   goToEditProducts(){
     this.router.navigate(['admin/products']);
   }
+
+  goToEditOrders(){
+    this.router.navigate(['admin/orders']);
+  }
+
+  goToCreateAdmin(){
+    this.router.navigate(['admin/create-admin']);
+  }
 }
 

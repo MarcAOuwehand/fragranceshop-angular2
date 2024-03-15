@@ -2,15 +2,23 @@
   <div class="login-section">
     <h4 class="login-header">Login</h4>
     <div class="input-container">
-      <input type="text" placeholder="Email" [(ngModel)]="email">
-      <input type="password" placeholder="Wachtwoord" [(ngModel)]="password">
+      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" #emailField="ngModel" required email>
+      <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="error-message">
+        <p *ngIf="emailField.errors?.required">Email is vereist.</p>
+        <p *ngIf="emailField.errors?.email">Ongeldig e-mailadres.</p>
+      </div>
+      <input type="password" placeholder="Wachtwoord" [(ngModel)]="password" name="password" #passwordField="ngModel" minlength="8" required>
+      <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)" class="error-message">
+        <p *ngIf="passwordField.errors?.required">Password is required.</p>
+        <p *ngIf="passwordField.errors?.minlength">Password must be at least 8 symbols.</p>
+      </div>
     </div>
     <div class="error-message" *ngIf="showError">
-      <p>Email of wachtwoord is niet correct. Probeer het opnieuw.</p>
+      <p>Email or password is incorrect.</p>
     </div>
     <div class="button-container">
-      <button (click)="onLogin()">Verder</button>
-      <p class="register-text" (click)="onRegister()">Register by clicking here</p>
+      <button (click)="onLogin()" [disabled]="emailField.invalid || passwordField.invalid">Login</button>
+      <p class="register-text" (click)="onRegister()">Register by clicking here.</p>
     </div>
   </div>
 </div>
