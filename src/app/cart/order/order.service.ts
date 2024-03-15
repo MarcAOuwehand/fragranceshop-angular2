@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class OrderService {
   orders: OrderModel[] = [];
-  apiUrl: string = 'http://localhost:8081/api/orders';
+  apiUrl: string = 'https://s1142622-iprwc.store:8081/api/orders';
   bearer: string = sessionStorage.getItem("token") || '';  // Toegevoegd || '' om te zorgen dat bearer altijd een string is
 
   constructor(private http: HttpClient) {}

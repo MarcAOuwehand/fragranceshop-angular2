@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 })
 export class ProductService {
   products: Product[] = [];
-  apiUrl: string = 'http://localhost:8081/api/products';
+  apiUrl: string = 'https://s1142622-iprwc.store:8081/api/products';
   bearer: string = sessionStorage.getItem("token") || '';
 
   constructor(private http: HttpClient) {}
