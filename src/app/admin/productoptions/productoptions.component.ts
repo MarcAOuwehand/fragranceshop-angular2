@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from "../../product/product.model";
 import { ProductService } from "../../product/product.service";
 import { DataStorageService } from "../../data-storage.service";
-import { CartService } from "../../cart/cart.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,6 +11,7 @@ import { Router } from "@angular/router";
 })
 export class ProductoptionsComponent implements OnInit {
   products: Product[] = [];
+  editingProduct: Product | null = null;
 
   constructor(private productService: ProductService,
               private dataStorageService: DataStorageService,
@@ -26,12 +26,35 @@ export class ProductoptionsComponent implements OnInit {
   }
 
   editProduct(product: Product) {
-    // Hier kun je de navigatie toevoegen naar de pagina voor het bewerken van het product
-    // Bijvoorbeeld: this.router.navigate(['/edit-product', product.id]);
+    this.editingProduct = { ...product };
+  }
+
+  cancelEdit() {
+    this.editingProduct = null;
+  }
+
+  updateProduct() {
+    if (!this.editingProduct) return;
+    this.productService.updateProduct(this.editingProduct).subscribe({
+      next: (updatedProduct) => {
+        this.editingProduct = null;
+      },
+      error: (error) => {
+        console.error("Can't update the product");
+        this.editingProduct = null;
+      }
+    });
   }
 
   deleteProduct(product: Product) {
-    this.productService.removeProduct(product.productID);
+    this.productService.removeProduct(product.productID).subscribe({
+      next: () => {
+        this.products = this.products.filter(p => p.productID !== product.productID);
+      },
+      error: (error) => {
+        console.error("Can't delete the product right now.");
+      }
+    });
   }
 
   goToAddProduct() {

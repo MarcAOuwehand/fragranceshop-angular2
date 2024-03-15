@@ -21,7 +21,8 @@ export class CreateproductComponent {
 
   onSubmit() {
     this.productService.addNewProduct(this.newProduct).subscribe(() => {
-      this.router.navigate(['/products']);
+      this.router.navigate(['/store']);
     });
   }
+
 }

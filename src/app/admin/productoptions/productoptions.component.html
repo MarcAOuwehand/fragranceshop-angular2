@@ -1,16 +1,60 @@
-<h1>Edit products</h1>
-<button class="button add-product-btn" (click)="goToAddProduct()">Product toevoegen</button>
-<div class="product-grid">
+<!-- productoptions.component.html -->
 
+<h1>Edit products</h1>
+<button class="button add-product-btn" (click)="goToAddProduct()">Add new product</button>
+<div class="product-grid">
   <div *ngFor="let product of products" class="product-card">
     <img [src]="product.img_path" alt="Product Image" class="product-image" />
     <div class="product-details">
       <p class="brand">{{ product.brand }}</p>
       <h2 class="name">{{ product.name }}</h2>
-      <p class="price">Prijs: €{{ product.price }}</p>
-
-      <button class="button edit-product-btn" (click)="editProduct(product)">Bewerken</button>
-      <button class="button delete-product-btn" (click)="deleteProduct(product)">Verwijderen</button>
+      <p class="price">Price: €{{ product.price }}</p>
+      <button class="button edit-product-btn" (click)="editProduct(product)">Edit</button>
+      <button class="button delete-product-btn" (click)="deleteProduct(product)">Delete</button>
     </div>
+  </div>
+</div>
+
+<div *ngIf="editingProduct" class="overlay">
+
+  <div *ngIf="editingProduct" class="overlay">
+    <form (ngSubmit)="updateProduct()" #productForm="ngForm" class="product-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="editingProduct.name" required maxlength="50" class="form-control" #name="ngModel">
+        <div *ngIf="name.invalid && name.touched" class="error-message">
+          Name is required and cannot be longer than 50 characters.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" [(ngModel)]="editingProduct.brand" required maxlength="50" class="form-control" #brand="ngModel">
+        <div *ngIf="brand.invalid && brand.touched" class="error-message">
+          Brand is required and cannot be longer than 50 characters.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" [(ngModel)]="editingProduct.price" required class="form-control" #price="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="editingProduct.description" required maxlength="250" class="form-control"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="imagePath">Imagepath:</label>
+        <input type="text" id="imagePath" name="imagePath" [(ngModel)]="editingProduct.img_path" required maxlength="250" class="form-control" #imagePath="ngModel">
+        <div *ngIf="imagePath.invalid && imagePath.touched" class="error-message">
+          Imagepath is required and cannot be longer than 250 characters.
+        </div>
+      </div>
+
+      <button type="button" (click)="cancelEdit()">Cancel</button>
+      <button type="submit" [disabled]="productForm.invalid" class="submit-button">Update product</button>
+    </form>
   </div>
 </div>
