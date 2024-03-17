@@ -6,7 +6,7 @@ import { OrderService } from "./cart/order/order.service";
 
 @Injectable()
 export class DataStorageService {
-  private apiUrl = 'https://s1142622-iprwc.store:8081';
+  private apiUrl = 'https://s1142622-iprwc.store:8081/api';
 
   constructor(
     private http: HttpClient,
