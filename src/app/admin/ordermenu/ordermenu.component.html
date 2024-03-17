@@ -1,0 +1,13 @@
+<div class="admin-orders-container">
+  <h2>All Orders</h2>
+
+  <ul class="orders-list">
+    <li *ngFor="let order of orders" class="order-item">
+      <div>
+        <p>Order ID: <span>{{ order.orderID }}</span></p>
+        <p>User ID: <span>{{ order.userID }}</span></p>
+      </div>
+      <button class="delete-btn" (click)="deleteOrder(order.orderID)">Delete</button>
+    </li>
+  </ul>
+</div>
